@@ -1,0 +1,29 @@
+<template>
+  <lightning-card title="Fax PDF Extractor">
+    <div class="slds-p-around_medium">
+      <template if:true={initLoaded}>
+        <div class="slds-text-title">Source PDF</div>
+        <div class="slds-m-bottom_small">
+          <a href={fileDownloadUrl} target="_blank" rel="noopener noreferrer">{fileName}</a>
+        </div>
+
+        <div class="slds-m-bottom_small">
+          <lightning-input type="text" label="Page Ranges (e.g., 1-2,6-7)" value={ranges} onchange={onRangesChange}></lightning-input>
+        </div>
+
+        <div class="slds-m-bottom_small">
+          <lightning-button variant="brand" label="Extract Pages" onclick={onExtract} disabled={isBusy}></lightning-button>
+          <lightning-button label="Check Status" onclick={onCheck} class="slds-m-left_small"></lightning-button>
+        </div>
+
+        <template if:true={statusText}>
+          <lightning-badge label={statusText}></lightning-badge>
+        </template>
+      </template>
+
+      <template if:false={initLoaded}>
+        <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+      </template>
+    </div>
+  </lightning-card>
+</template>
